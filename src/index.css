@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+
+.scrollVertical {
+  height: 85vh;
+  overflow-y: scroll;
+}
+
+.scrollVertical2 {
+  height: 59vh;
+  overflow-y: scroll;
+}
