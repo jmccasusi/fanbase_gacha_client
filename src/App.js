@@ -6,7 +6,25 @@ class App extends React.Component {
     super(props)
     this.state = {
     }
+    this.scrollToBottom = this.scrollToBottom.bind(this);
   }
+
+
+  scrollToBottom() {
+    const scrollHeight = this.messageList.scrollHeight;
+    const height = this.messageList.clientHeight;
+    const maxScrollTop = scrollHeight - height;
+    this.messageList.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+  }
+
+  componentDidMount () {
+    this.scrollToBottom()
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
   render() {
     return (
       <div className="overflow-hidden">
@@ -44,7 +62,9 @@ class App extends React.Component {
                 <h5>Chat Room 1</h5>
               </Row>
               <Row className="w-100">
-                <Col xs={12} className='flex-column jumbotron scrollVertical2'>
+                <Col xs={12} className='MessageList flex-column jumbotron scrollVertical2' ref={(div) => {
+          this.messageList = div;
+        }}>
                 <div>
                   <h5>Conversations</h5>
                 </div>
@@ -168,6 +188,8 @@ class App extends React.Component {
                     Hello!
                   </h6>
                 </div>
+
+                <div ref={this.messagesEndRef} />
                 </Col>
               </Row>
               <Row className="w-100">
