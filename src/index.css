@@ -12,13 +12,15 @@ code {
     monospace;
 }
 
+.defaultHeight {
+  height: 500px;
+}
 
 .scrollVertical {
-  height: 85vh;
   overflow-y: scroll;
 }
 
 .scrollVertical2 {
-  height: 59vh;
+  height: calc(100% / 3);
   overflow-y: scroll;
 }
