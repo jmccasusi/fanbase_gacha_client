@@ -13,34 +13,13 @@ class RightComponent extends React.Component {
               </div>
               <Row className='align-items-center p-3'>
               <div className='col-12'>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
-                <div className='d-flex flex-row'>Member</div>
+                {
+                  this.props.groupData.users.map(member => {
+                    return (
+                      <div className='d-flex flex-row'>{member.username}</div>
+                    )
+                  })
+                }
               </div>
               </Row>
             </Col>
