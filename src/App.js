@@ -11,24 +11,99 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      centerPanel: 'login',
       loaded: false,
       alert: '',
-      groupData: {}
+      groupData: {},
+      currentRoomIndex: 0,
+      currentRoomID: 1,
+      currentGroupID: 1,
+      currentUser: null
     }
     this.getGroupData = this.getGroupData.bind(this);
+    this.changeRoom = this.changeRoom.bind(this);
+    this.handleMessageSubmission = this.handleMessageSubmission.bind(this);
+    this.changeCenterPanel = this.changeCenterPanel.bind(this);
+
+    this.loginUser = this.loginUser.bind(this);
+    this.logoutUser = this.logoutUser.bind(this);
+  }
+
+  async loginUser(jwt) {
+      const config = { 
+        headers: {
+          "Authorization": `Bearer ${jwt}`
+        }
+      }
+      const currentUser = await axios.get(`http://localhost:3000/users`, config)
+      
+      console.log(currentUser.data);
+      
+      this.setState({
+        currentUser: currentUser.data
+    })
+  }
+
+  checkSession() {
+    if (sessionStorage.getItem('jwt')) {
+      const jwt = sessionStorage.getItem('jwt');
+      this.loginUser(jwt);
+      this.changeCenterPanel('chatbox');
+    }
+  }
+
+  // Log out User
+  logoutUser() {
+    sessionStorage.removeItem('jwt');
+    this.setState({
+      currentUser: null
+    });
+  }
+
+  changeCenterPanel(component){
+    this.setState({
+      centerPanel: component
+    })
+  }
+
+  changeRoom(room_id) {
+    this.state.groupData.rooms.map( (room, index) => {
+      if(room.id === room_id){
+        this.setState(
+          {
+            currentRoomIndex: index,
+            currentRoomID: room_id
+          }
+        )
+      }
+    })
+  }
+
+  async handleMessageSubmission(messageContent) {
+    await axios.post(`http://localhost:3000/groups/${this.state.currentGroupID}/rooms/${this.state.currentRoomID}/messages`, {
+      content: messageContent,
+      user_id: this.state.currentUser.id
+    });
+
+    this.getGroupData(this.state.currentGroupID);
   }
 
   async getGroupData(group_id) {
     const response = await axios(`http://localhost:3000/groups/${group_id}`);
     this.setState({
       groupData: response.data,
-      loaded: true
+      loaded: true,
+      currentGroupID: group_id
     })
     console.log(this.state.groupData)
   }
 
   async componentDidMount() {
     await this.getGroupData(1);
+    this.setState({
+      currentRoomID: this.state.groupData.rooms[0].id
+    })
+    await this.checkSession();
   }
 
   content() {
@@ -38,9 +113,9 @@ class App extends React.Component {
         <AlertComponent/>
         <div>
           <Row>
-            <LeftComponent/>
-            <CenterComponent groupData={this.state.groupData}/>
-            <RightComponent groupData={this.state.groupData}/>
+            <LeftComponent groupData={this.state.groupData} changeRoom={this.changeRoom} currentUser={this.state.currentUser}/>
+            <CenterComponent centerPanel={this.state.centerPanel} changeCenterPanel={this.changeCenterPanel} groupData={this.state.groupData} currentRoomIndex={this.state.currentRoomIndex} handleMessageSubmission={this.handleMessageSubmission} currentUser={this.state.currentUser} loginUser={this.loginUser}/>
+            <RightComponent groupData={this.state.groupData} currentUser={this.state.currentUser}/>
           </Row>
         </div>
       </div>

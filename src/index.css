@@ -13,15 +13,18 @@ code {
 }
 
 .defaultHeight {
-  height: 500px;
+  height: 600px;
 }
 
 .scrollVertical {
+
+  height: 600px;
   overflow-y: scroll;
 }
 
 .scrollVertical2 {
-  height: calc(100% / 2);
+  min-height: 400px;
+  max-height: 400px;
   overflow-y: scroll;
 }
 
