@@ -63,4 +63,10 @@ code {
 
 .character-card {
   width: 200px;
+  margin: 5px;
+}
+
+.character-card-text {
+  font-size: 13px;
+  padding: 0px 5px 0px 5px;
 }

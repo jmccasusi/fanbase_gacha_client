@@ -81,6 +81,12 @@ class LoginComponent extends React.Component {
     }
 }
 
+componentDidMount() {
+  if(this.props.currentUser != null) {
+    this.props.changeCenterPanel('chatbox');
+  }
+}
+
   render() {
     return (
       <div className="defaultHeight w-100">

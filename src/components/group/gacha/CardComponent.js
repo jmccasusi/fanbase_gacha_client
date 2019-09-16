@@ -6,12 +6,14 @@ class CardComponent extends React.Component {
         return (
             <>
             <div class="card character-card">
-                <img src="http://noodleblvd.com/wp-content/uploads/2016/10/No-Image-Available.jpg" class="card-img-top" alt="..."/>
-                <div class="card-body">
-                    <h5 class="card-title overflow-hidden">{this.props.card.name}</h5>
-                    <p class="card-text">{this.props.card.deck_id}</p>
-                    <a href="#" class="btn btn-primary">Claim</a>
+                <div class="card-body d-flex flex-column overflow-hidden">
+                    <h6 class="card-title character-card-text">{this.props.card.name}</h6>
                 </div>
+                <div class="card-body d-flex flex-column overflow-hidden">
+                    <h6 class="card-text character-card-text">{this.props.card.deck.name}</h6>
+                </div>
+                <img src={this.props.card.img_url} class="card-img-top" alt="..."/>
+                <a href="#" class="btn btn-success">Claim</a>
             </div>
             </>
         )

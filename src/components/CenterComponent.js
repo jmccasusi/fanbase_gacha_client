@@ -11,7 +11,7 @@ class CenterComponent extends React.Component {
         )
       } else if(this.props.centerPanel == 'login') {
         return(
-          <LoginComponent changeCenterPanel={this.props.changeCenterPanel} loginUser={this.props.loginUser}/>
+          <LoginComponent changeCenterPanel={this.props.changeCenterPanel} loginUser={this.props.loginUser} currentUser={this.props.currentUser}/>
         )
       }
     }

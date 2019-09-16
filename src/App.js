@@ -11,7 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      centerPanel: 'roll',
+      centerPanel: 'login',
       loaded: false,
       alert: '',
       groupData: {},
@@ -144,7 +144,7 @@ class App extends React.Component {
     return(
       <div className="overflow-hidden">
         <HeaderComponent currentUser={this.state.currentUser} logoutUser={this.logoutUser}/>
-        <AlertComponent/>
+       { /*<AlertComponent/>*/}
         <div>
           <Row>
             <LeftComponent groupData={this.state.groupData} changeRoom={this.changeRoom} currentUser={this.state.currentUser}/>
