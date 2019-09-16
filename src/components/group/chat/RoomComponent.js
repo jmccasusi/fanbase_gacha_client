@@ -3,7 +3,7 @@ import { Container, Row, Col, Alert } from 'react-bootstrap'
 
 class RoomComponent extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.scrollToBottom = this.scrollToBottom.bind(this);
     }
 
@@ -15,8 +15,12 @@ class RoomComponent extends React.Component {
     }
 
     componentDidMount () {
+        // for testing purposes: sending to the echo service which will send it back back
+        // setInterval( _ =>{
+        //     this.connection.send( Math.random() )
+        // }, 2000 )
+
         this.scrollToBottom()
-        console.log(this.props.currentUser);
     }
 
     componentDidUpdate() {

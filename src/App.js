@@ -53,7 +53,7 @@ class App extends React.Component {
     if (sessionStorage.getItem('jwt')) {
       const jwt = sessionStorage.getItem('jwt');
       this.loginUser(jwt);
-      // this.changeCenterPanel('chatbox');
+      this.changeCenterPanel('chatbox');
     }
   }
 
@@ -96,7 +96,7 @@ class App extends React.Component {
       user_id: this.state.currentUser.id
     });
 
-    this.getGroupData(this.state.currentGroupID);
+    // this.getGroupData(this.state.currentGroupID);
   }
 
   /////////////////////////////////////////////
@@ -137,6 +137,8 @@ class App extends React.Component {
       currentRoomID: this.state.groupData.rooms[0].id
     })
     await this.checkSession();
+
+
   }
 
   // Make sure group data is loaded before rendering anything
