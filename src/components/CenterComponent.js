@@ -1,13 +1,13 @@
 import React from 'react'
 import { Container, Row, Col, Alert } from 'react-bootstrap'
-import ChatboxComponent from './group/ChatboxComponent';
-import LoginComponent from './user/LoginComponent';
+import LoginComponent from './stranger/LoginComponent';
+import CenterGroupComponent from './group/CenterGroupComponent';
 
 class CenterComponent extends React.Component {
     renderCenterPanel = () => {
-      if(this.props.centerPanel == 'chatbox'){
+      if(this.props.currentUser !== null){
         return(
-          <ChatboxComponent groupData={this.props.groupData} currentRoomIndex={this.props.currentRoomIndex} handleMessageSubmission={this.props.handleMessageSubmission}/>
+          <CenterGroupComponent rollingDeck={this.props.rollingDeck} groupData={this.props.groupData} currentRoomIndex={this.props.currentRoomIndex} handleMessageSubmission={this.props.handleMessageSubmission} currentUser={this.props.currentUser} centerPanel={this.props.centerPanel}/>
         )
       } else if(this.props.centerPanel == 'login') {
         return(

@@ -6,7 +6,10 @@ class LeftComponent extends React.Component {
     render() {
         return (
             <>
-              <LeftControlPanelComponent groupData={this.props.groupData} changeRoom={this.props.changeRoom}/>
+            { this.props.currentUser !== null ?
+              (<LeftControlPanelComponent groupData={this.props.groupData} changeRoom={this.props.changeRoom} currentUser={this.props.currentUser}/>) :
+              null
+            }
             </>
         )
     }

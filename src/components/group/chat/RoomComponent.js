@@ -16,6 +16,7 @@ class RoomComponent extends React.Component {
 
     componentDidMount () {
         this.scrollToBottom()
+        console.log(this.props.currentUser);
     }
 
     componentDidUpdate() {
@@ -33,11 +34,17 @@ class RoomComponent extends React.Component {
                 {
                     this.props.messages.map(message => {
                         return(
-                            <div>
-                                <div className="message-user">
-                                    {message.user.username}
+                            <div className="d-flex flex-column">
+                                <div className={
+                                    message.user.id == this.props.currentUser.id ? ("message-user message-current-user") : ("message-user")
+                                }>
+                                {
+                                    message.user.id == this.props.currentUser.id ? (message.user.username + " (YOU)") : (message.user.username)
+                                }
                                 </div>
-                                <div className="message">{message.content}</div>
+                                <div className={
+                                    message.user.id ==  this.props.currentUser.id ? ("message message-current") : ("message")
+                                }>{message.content}</div>
                             </div>
                         )
                     })

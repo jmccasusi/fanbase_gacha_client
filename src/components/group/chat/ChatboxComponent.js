@@ -28,16 +28,13 @@ class ChatboxComponent extends React.Component {
 
     render() {
         return (
-            <div className='w-100'>
+            <>
             <Row className='flex-row justify-content-center border-bottom w-100'>
-                <h2>{this.props.groupData.name}</h2>
-              </Row>
-              <Row className='flex-row justify-content-center border-bottom w-100'>
                 <h5>{this.props.groupData.rooms[`${this.props.currentRoomIndex}`].name}</h5>
-              </Row>
-                <RoomComponent messages={this.props.groupData.rooms[`${this.props.currentRoomIndex}`].messages}/>
-                <Row className="flex-row w-100">
-              <Col xs={12} className="p-0">
+            </Row>
+            <RoomComponent messages={this.props.groupData.rooms[`${this.props.currentRoomIndex}`].messages} currentUser={this.props.currentUser}/>
+            <Row className="flex-row w-100">
+              <Col xs={12} className="p-0 ml-3">
               <Form onSubmit={this.handleSubmit}>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -51,7 +48,7 @@ class ChatboxComponent extends React.Component {
               </Form>
               </Col>
             </Row>
-            </div>
+            </>
         )
     }
 

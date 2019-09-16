@@ -29,19 +29,38 @@ code {
 }
 
 .message {
+  width: 75%;
+  align-self: flex-start;
   background-color: aliceblue;
   border: 1 px solid black;
   border-radius: 3px;
   margin: -10px 10px 15px 10px;
-  padding: 15px 15px 10px 15px;
+  padding: 25px 20px 25px 20px;
 }
 
 .message-user {
   display: inline;
+  align-self: flex-start;
   background-color: sienna;
   color: white;
   border: 1 px solid black;
   border-radius: 3px;
-  margin: 15px 10px 0px 0px;
-  padding: 6px;
+  margin: 0px 0px -7px -7px;
+  padding: 5px;
+  z-index: 10;
+}
+
+
+.message-current-user {
+  align-self: flex-end;
+  background-color: mediumpurple;
+  margin: 0px -7px -7px 0px;
+}
+
+.message-current {
+  align-self: flex-end;
+}
+
+.character-card {
+  width: 200px;
 }
