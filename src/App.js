@@ -11,7 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      centerPanel: 'login',
+      centerPanel: 'signup',
       loaded: false,
       alert: '',
       groupData: {},
@@ -73,6 +73,7 @@ class App extends React.Component {
     // group/chat/'chatbox' -> ChatboxComponent
     // group/gacha/'roll' -> RollingSiteComponent
     // stranger/'login' -> LoginComponent
+    // stranger/'signup' -> SignUpComponent
 
     this.setState({
       centerPanel: component
@@ -109,7 +110,9 @@ class App extends React.Component {
     // this.setState({
     //     messages: messageArray
     // })
-    this.getGroupData(this.state.currentGroupID);
+    if(this.state.messages.length !== messageArray){
+      this.getGroupData(this.state.currentGroupID);
+    }
     this.setState({
         messages: this.state.groupData.rooms[`${this.state.currentRoomIndex}`].messages
     })
@@ -144,7 +147,9 @@ class App extends React.Component {
       currentGroupID: group_id
     })
     this.buildRollingDeck()
-    this.resetMessages(this.state.groupData.rooms[`${this.state.currentRoomIndex}`].messages);
+    if(this.state.messages.length === this.state.groupData.rooms[`${this.state.currentRoomIndex}`].messages){
+      this.resetMessages(this.state.groupData.rooms[`${this.state.currentRoomIndex}`].messages);
+    }
     console.log(this.state.groupData)
   }
 

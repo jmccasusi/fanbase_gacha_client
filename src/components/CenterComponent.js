@@ -1,6 +1,7 @@
 import React from 'react'
 import { Container, Row, Col, Alert } from 'react-bootstrap'
 import LoginComponent from './stranger/LoginComponent';
+import SignUpComponent from './stranger/SignUpComponent';
 import CenterGroupComponent from './group/CenterGroupComponent';
 
 class CenterComponent extends React.Component {
@@ -12,6 +13,10 @@ class CenterComponent extends React.Component {
       } else if(this.props.centerPanel == 'login') {
         return(
           <LoginComponent changeCenterPanel={this.props.changeCenterPanel} loginUser={this.props.loginUser} currentUser={this.props.currentUser}/>
+        )
+      } else if(this.props.centerPanel == 'signup') {
+        return(
+          <SignUpComponent changeCenterPanel={this.props.changeCenterPanel} currentUser={this.props.currentUser}/>
         )
       }
     }
