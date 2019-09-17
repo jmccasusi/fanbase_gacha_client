@@ -16,6 +16,8 @@ class LeftControlPanelComponent extends React.Component {
                           return (
                               <li onClick={() => {
                                 this.props.changeRoom(room.id);
+                                this.props.changeCenterPanel('chatbox');
+                                this.props.resetMessages(this.props.groupData.rooms[`${this.props.currentRoomIndex}`].messages);
                               }}>{room.name}</li>
                           )
                       })
@@ -25,7 +27,9 @@ class LeftControlPanelComponent extends React.Component {
               <Row className='flex-row justify-content-center  border-bottom w-100 my-2 py-2'>
                 <div className="flex-column align-items-center">
                   <h5>Gacha Game</h5>
-                  <li>Rolling Site</li>
+                  <li onClick={()=> {
+                    this.props.changeCenterPanel('roll')
+                  }}>Rolling Site</li>
                   <li>Voting Likes</li>
                   <li>Trading Hall</li>
                 </div>

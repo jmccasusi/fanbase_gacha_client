@@ -7,7 +7,7 @@ class CenterComponent extends React.Component {
     renderCenterPanel = () => {
       if(this.props.currentUser !== null){
         return(
-          <CenterGroupComponent rollingDeck={this.props.rollingDeck} groupData={this.props.groupData} currentRoomIndex={this.props.currentRoomIndex} handleMessageSubmission={this.props.handleMessageSubmission} currentUser={this.props.currentUser} centerPanel={this.props.centerPanel}/>
+          <CenterGroupComponent rollingDeck={this.props.rollingDeck} groupData={this.props.groupData} currentRoomIndex={this.props.currentRoomIndex} handleMessageSubmission={this.props.handleMessageSubmission} currentUser={this.props.currentUser} centerPanel={this.props.centerPanel} messages={this.props.messages} resetMessages={this.props.resetMessages}/>
         )
       } else if(this.props.centerPanel == 'login') {
         return(

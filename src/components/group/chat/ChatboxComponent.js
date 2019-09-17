@@ -7,7 +7,7 @@ class ChatboxComponent extends React.Component {
       super(props);
       this.state = {
           messageContent: '',
-          messages : [] 
+          messages: this.props.messages
       }
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,9 +28,6 @@ class ChatboxComponent extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({
-            messages: this.props.groupData.rooms[`${this.props.currentRoomIndex}`].messages
-        })
         const socket = new WebSocket('ws://localhost:3000/cable');
         // listen to onmessage event
         // this.connection.onmessage = evt => { 
@@ -52,9 +49,7 @@ class ChatboxComponent extends React.Component {
             var data = JSON.parse(server_message.data).message;
             console.log(JSON.parse(data));
             if(typeof JSON.parse(data) === 'object'){
-                this.setState({
-                    messages : [...this.state.messages, JSON.parse(data)]
-            })
+                this.props.resetMessages([...this.state.messages, JSON.parse(data)])
             }
         }.bind(this)
 
@@ -75,7 +70,7 @@ class ChatboxComponent extends React.Component {
             <Row className='flex-row justify-content-center border-bottom w-100'>
                 <h5>{this.props.groupData.rooms[`${this.props.currentRoomIndex}`].name}</h5>
             </Row>
-            <RoomComponent messages={this.state.messages} currentUser={this.props.currentUser}/>
+            <RoomComponent messages={this.props.messages} currentUser={this.props.currentUser}/>
            
             <Row className="flex-row w-100">
               <Col xs={12} className="p-0 ml-3">

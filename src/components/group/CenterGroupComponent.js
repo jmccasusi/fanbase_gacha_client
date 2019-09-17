@@ -5,14 +5,14 @@ import ChatboxComponent from './chat/ChatboxComponent';
 
 class CenterGroupComponent extends React.Component {
     renderCenterPanel = () => {
-        if(this.props.centerPanel == 'chatbox' && this.props.currentUser !== null){
-          return(
-            <ChatboxComponent groupData={this.props.groupData} currentRoomIndex={this.props.currentRoomIndex} handleMessageSubmission={this.props.handleMessageSubmission} currentUser={this.props.currentUser}/>
-          )
-        } else if(this.props.centerPanel == 'roll') {
+        if(this.props.centerPanel == 'roll'){
           return(
             <RollingSiteComponent rollingDeck={this.props.rollingDeck}/>
-          )
+            )
+          } else {
+            return(
+            <ChatboxComponent groupData={this.props.groupData} currentRoomIndex={this.props.currentRoomIndex} handleMessageSubmission={this.props.handleMessageSubmission} currentUser={this.props.currentUser} messages={this.props.messages} resetMessages={this.props.resetMessages}/>
+              )
         }
       }
     render() {

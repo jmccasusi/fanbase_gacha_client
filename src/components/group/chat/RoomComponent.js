@@ -4,6 +4,9 @@ import { Container, Row, Col, Alert } from 'react-bootstrap'
 class RoomComponent extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            currentMessages: []
+        }
         this.scrollToBottom = this.scrollToBottom.bind(this);
     }
 
@@ -15,6 +18,9 @@ class RoomComponent extends React.Component {
     }
 
     componentDidMount () {
+        this.setState({
+            currentMessages: this.props.messages
+        })
         // for testing purposes: sending to the echo service which will send it back back
         // setInterval( _ =>{
         //     this.connection.send( Math.random() )
@@ -24,7 +30,12 @@ class RoomComponent extends React.Component {
     }
 
     componentDidUpdate() {
-        this.scrollToBottom();
+        if(this.props.messages.length !== this.state.currentMessages.length){
+            this.setState({
+            currentMessages: this.props.messages
+            })
+            this.scrollToBottom();
+        }
     }
     render() {
         return (

@@ -16,6 +16,7 @@ class App extends React.Component {
       alert: '',
       groupData: {},
       rollingDeck: [],
+      messages : [],
       currentRoomIndex: 0,
       currentRoomID: 0,
       currentGroupID: 0,
@@ -23,6 +24,7 @@ class App extends React.Component {
     }
     this.getGroupData = this.getGroupData.bind(this);
     this.changeRoom = this.changeRoom.bind(this);
+    this.resetMessages = this.resetMessages.bind(this);
     this.handleMessageSubmission = this.handleMessageSubmission.bind(this);
     this.changeCenterPanel = this.changeCenterPanel.bind(this);
 
@@ -53,7 +55,7 @@ class App extends React.Component {
     if (sessionStorage.getItem('jwt')) {
       const jwt = sessionStorage.getItem('jwt');
       this.loginUser(jwt);
-      this.changeCenterPanel('chatbox');
+      // this.changeCenterPanel('chatbox');
     }
   }
 
@@ -68,6 +70,10 @@ class App extends React.Component {
 
   // Page Layout Control for Center Panel
   changeCenterPanel(component){
+    // group/chat/'chatbox' -> ChatboxComponent
+    // group/gacha/'roll' -> RollingSiteComponent
+    // stranger/'login' -> LoginComponent
+
     this.setState({
       centerPanel: component
     })
@@ -99,6 +105,16 @@ class App extends React.Component {
     // this.getGroupData(this.state.currentGroupID);
   }
 
+  resetMessages(messageArray){
+    // this.setState({
+    //     messages: messageArray
+    // })
+    this.getGroupData(this.state.currentGroupID);
+    this.setState({
+        messages: this.state.groupData.rooms[`${this.state.currentRoomIndex}`].messages
+    })
+  }
+
   /////////////////////////////////////////////
 
   buildRollingDeck() {
@@ -128,6 +144,7 @@ class App extends React.Component {
       currentGroupID: group_id
     })
     this.buildRollingDeck()
+    this.resetMessages(this.state.groupData.rooms[`${this.state.currentRoomIndex}`].messages);
     console.log(this.state.groupData)
   }
 
@@ -149,8 +166,8 @@ class App extends React.Component {
        { /*<AlertComponent/>*/}
         <div>
           <Row>
-            <LeftComponent groupData={this.state.groupData} changeRoom={this.changeRoom} currentUser={this.state.currentUser}/>
-            <CenterComponent rollingDeck={this.state.rollingDeck} centerPanel={this.state.centerPanel} changeCenterPanel={this.changeCenterPanel} groupData={this.state.groupData} currentRoomIndex={this.state.currentRoomIndex} handleMessageSubmission={this.handleMessageSubmission} currentUser={this.state.currentUser} loginUser={this.loginUser}/>
+            <LeftComponent groupData={this.state.groupData} changeRoom={this.changeRoom} currentUser={this.state.currentUser} changeCenterPanel={this.changeCenterPanel} resetMessages={this.resetMessages} currentRoomIndex={this.state.currentRoomIndex}/>
+            <CenterComponent rollingDeck={this.state.rollingDeck} centerPanel={this.state.centerPanel} changeCenterPanel={this.changeCenterPanel} groupData={this.state.groupData} currentRoomIndex={this.state.currentRoomIndex} handleMessageSubmission={this.handleMessageSubmission} currentUser={this.state.currentUser} loginUser={this.loginUser} messages={this.state.messages} resetMessages={this.resetMessages}/>
             <RightComponent groupData={this.state.groupData} currentUser={this.state.currentUser}/>
           </Row>
         </div>
