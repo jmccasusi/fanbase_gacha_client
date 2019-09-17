@@ -12,15 +12,15 @@ class LeftControlPanelComponent extends React.Component {
                 <div className="flex-column align-items-center">
                   <h5>Chat Rooms</h5>
                   {
-                      this.props.groupData.rooms.map(room => {
+                    this.props.rooms ? (
+                      this.props.rooms.map(room => {
                           return (
                               <li onClick={() => {
-                                this.props.changeRoom(room.id);
-                                this.props.changeCenterPanel('chatbox');
-                                this.props.resetMessages(this.props.groupData.rooms[`${this.props.currentRoomIndex}`].messages);
+                                this.props.changeRoomData(room.id);
+                                this.props.changePageConfig('chat');
                               }}>{room.name}</li>
                           )
-                      })
+                      })) : null
                   }
                 </div>
               </Row>
@@ -28,10 +28,17 @@ class LeftControlPanelComponent extends React.Component {
                 <div className="flex-column align-items-center">
                   <h5>Gacha Game</h5>
                   <li onClick={()=> {
-                    this.props.changeCenterPanel('roll')
+                    this.props.changePageConfig('gacha')
                   }}>Rolling Site</li>
-                  <li>Voting Likes</li>
-                  <li>Trading Hall</li>
+                  <li><del>Voting Likes</del></li>
+                  <li><del>Trading Hall</del></li>
+                  {
+                    this.props.owner ? (
+                      this.props.owner.id == this.props.currentUser.id ? (
+                        <li>Group Settings</li>
+                      ) : null
+                    ) : null
+                  }
                 </div>
               </Row>
             </Col>

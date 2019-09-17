@@ -15,10 +15,11 @@ class HeaderComponent extends React.Component {
                         {
                             this.props.currentUser !== null ?
                             (
-                                <Nav.Link href="#" onClick={this.props.logoutUser}>Log Out</Nav.Link>
-                            ) : (
-                                <Nav.Link href="#">Log In</Nav.Link>
-                            )
+                                <Nav.Link href="#" onClick={() => {
+                                    this.props.logoutUser();
+                                    this.props.changeCoreConfig('stranger');
+                                }}>Log Out</Nav.Link>
+                            ) : null
                         }
                         
                     </Nav>

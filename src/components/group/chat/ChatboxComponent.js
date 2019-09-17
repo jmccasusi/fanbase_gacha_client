@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios';
 import { Container, Row, Col, Alert, Form } from 'react-bootstrap'
 import RoomComponent from './RoomComponent';
 
@@ -7,10 +8,11 @@ class ChatboxComponent extends React.Component {
       super(props);
       this.state = {
           messageContent: '',
-          messages: this.props.messages
+          messages: []
       }
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.getMessages = this.getMessages.bind(this);
     }
 
     handleChange(event) {
@@ -27,15 +29,17 @@ class ChatboxComponent extends React.Component {
         this.props.handleMessageSubmission(this.state.messageContent);
     }
 
+    getMessages(){
+        this.setState({
+            messages: this.props.currentMessages
+        })
+    }
+
     componentDidMount() {
-        const socket = new WebSocket('ws://localhost:3000/cable');
-        // listen to onmessage event
-        // this.connection.onmessage = evt => { 
-        //  // add the new message to state
-        //     this.setState({
-        //         messages : this.state.messages.concat([ evt.data ])
-        //     })
-        // };
+        console.log(this.props.currentRoomData.messages)
+        this.getMessages();
+        const socket = new WebSocket('ws://fanbase-gacha-api.herokuapp.com/cable');
+
         socket.onopen = function(e) {
             console.log("Connection established")
             socket.send(subscribeString)
@@ -48,8 +52,8 @@ class ChatboxComponent extends React.Component {
             var server_message = e;
             var data = JSON.parse(server_message.data).message;
             console.log(JSON.parse(data));
-            if(typeof JSON.parse(data) === 'object'){
-                this.props.resetMessages([...this.state.messages, JSON.parse(data)])
+            if(typeof JSON.parse(data) === 'object' && this.state.messages){
+                this.props.updateMessages(JSON.parse(data));
             }
         }.bind(this)
 
@@ -66,11 +70,11 @@ class ChatboxComponent extends React.Component {
 
     render() {
         return (
-            <>
+            <Col className="d-flex flex-column col-md-6 align-items-center border border-dark px-4 py-2 w-100 defaultHeight">
             <Row className='flex-row justify-content-center border-bottom w-100'>
-                <h5>{this.props.groupData.rooms[`${this.props.currentRoomIndex}`].name}</h5>
+                <h5>{this.props.currentRoomData.name}</h5>
             </Row>
-            <RoomComponent messages={this.props.messages} currentUser={this.props.currentUser}/>
+            <RoomComponent currentMessages={this.props.currentMessages} currentUser={this.props.currentUser}/>
            
             <Row className="flex-row w-100">
               <Col xs={12} className="p-0 ml-3">
@@ -87,7 +91,7 @@ class ChatboxComponent extends React.Component {
               </Form>
               </Col>
             </Row>
-            </>
+            </Col>
         )
     }
 

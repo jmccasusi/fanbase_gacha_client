@@ -17,7 +17,11 @@ class SignUpComponent extends React.Component {
 
     async handleUserCreation(event) {
         event.preventDefault()
-        const response = await axios.post(`http://localhost:3000/users`, this.state);
+        const response = await axios.post(`${this.props.baseURL}/users`, {
+            email: this.state.email,
+            username: this.state.username,
+            password: this.state.password
+        });
         this.setState({
             email : '',
             username : '',
@@ -35,14 +39,13 @@ class SignUpComponent extends React.Component {
 
     renderRedirect = () => {
         if (this.state.toLoginPage) {
-            this.props.changeCenterPanel('login');
+            this.props.changePageConfig('login');
         }
     }
 
     render() {
         return (
-            <div>
-                <div className='jumbotron container'>
+                <div className='jumbotron w-100'>
                 {this.renderRedirect()}
                         <h1> Sign Up </h1>
                         <p>Fill out the following to create an account</p>
@@ -67,8 +70,11 @@ class SignUpComponent extends React.Component {
                                 <a href='/'><button className='back' type="button" className="btn btn-danger"> Cancel </button></a>
                             </div>
                         </form>
-                </div>    
-            </div>
+                        <hr/>
+                        <div className="d-flex justify-content-center">
+                            <h6>Already have an account? <a href='#' onClick={() => {this.props.changePageConfig('login')}}>Sign in!</a></h6>
+                        </div>
+                </div> 
         )
     }
 }

@@ -37,7 +37,7 @@ class RollingSiteComponent extends React.Component {
 
     render() {
         return (
-           <>
+           <Col className="d-flex flex-column col-md-6 align-items-center border border-dark px-4 py-2 w-100 defaultHeight">
             <Row className='flex-row justify-content-center border-bottom w-100'>
                 <h5>GACHA - Rolling Site</h5>
             </Row>
@@ -55,7 +55,7 @@ class RollingSiteComponent extends React.Component {
             <Row>
                 <Button onClick={this.rollCards}>ROLL</Button>
             </Row>
-           </>
+           </Col>
         )
     }
 

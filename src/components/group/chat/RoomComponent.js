@@ -19,7 +19,7 @@ class RoomComponent extends React.Component {
 
     componentDidMount () {
         this.setState({
-            currentMessages: this.props.messages
+            currentMessages: this.props.currentMessages
         })
         // for testing purposes: sending to the echo service which will send it back back
         // setInterval( _ =>{
@@ -30,11 +30,13 @@ class RoomComponent extends React.Component {
     }
 
     componentDidUpdate() {
-        if(this.props.messages.length !== this.state.currentMessages.length){
-            this.setState({
-            currentMessages: this.props.messages
-            })
-            this.scrollToBottom();
+        if(this.props.currentMessages && this.state.currentMessages){
+            if(this.props.currentMessages.length !== this.state.currentMessages.length){
+                this.setState({
+                currentMessages: this.props.currentMessages
+                })
+                this.scrollToBottom();
+            }
         }
     }
     render() {
@@ -47,22 +49,24 @@ class RoomComponent extends React.Component {
                     </div>
                     
                 {
-                    this.props.messages.map(message => {
-                        return(
-                            <div className="d-flex flex-column">
-                                <div className={
-                                    message.user.id == this.props.currentUser.id ? ("message-user message-current-user") : ("message-user")
-                                }>
-                                {
-                                    message.user.id == this.props.currentUser.id ? (message.user.username + " (YOU)") : (message.user.username)
-                                }
+                    this.props.currentMessages ? (
+                        this.props.currentMessages.map(message => {
+                            return(
+                                <div className="d-flex flex-column">
+                                    <div className={
+                                        message.user.id == this.props.currentUser.id ? ("message-user message-current-user") : ("message-user")
+                                    }>
+                                    {
+                                        message.user.id == this.props.currentUser.id ? (message.user.username + " (YOU)") : (message.user.username)
+                                    }
+                                    </div>
+                                    <div className={
+                                        message.user.id ==  this.props.currentUser.id ? ("message message-current") : ("message")
+                                    }>{message.content}</div>
                                 </div>
-                                <div className={
-                                    message.user.id ==  this.props.currentUser.id ? ("message message-current") : ("message")
-                                }>{message.content}</div>
-                            </div>
-                        )
-                    })
+                            )
+                        })
+                    ) : null
                 }
 
                 <div ref={this.messagesEndRef} />

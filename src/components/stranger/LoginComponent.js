@@ -21,18 +21,20 @@ class LoginComponent extends React.Component {
   handleSubmit(event) {
       event.preventDefault();
       
-      axios.post(`http://localhost:3000/user_token`, {
+      axios.post(`${this.props.baseURL}/user_token`, {
           auth: {
             email: this.state.email,
               password: this.state.password
           }
-      }).then((res) => {
+      })
+      .then((res) => {
+        console.log('got', res.data)
         this.setState({
             email: '',
             password: '',
             isAdmin: false
         })
-        this.props.changeCenterPanel('chatbox');
+        this.props.changeCoreConfig('group');
         sessionStorage.setItem("jwt", res.data.jwt);
         this.props.loginUser(res.data.jwt);
         }
@@ -120,7 +122,7 @@ componentDidMount() {
               </Form>
               <hr/>
               <div className="d-flex justify-content-center">
-                <h6>Don't have an account? Create one!</h6>
+                <h6>Don't have an account? <a href='#' onClick={() => {this.props.changePageConfig('signup')}}>Create one!</a></h6>
               </div>
             </div> 
         </div>    
