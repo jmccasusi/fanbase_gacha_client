@@ -11,7 +11,8 @@ class App extends React.Component {
     super(props)
     this.state = {
       loaded: false,
-      alert: '',
+      alertMessage: null,
+      alertType: null,
       currentUser: null,
       coreConfig: 'group'
     }
@@ -19,6 +20,8 @@ class App extends React.Component {
     this.loginUser = this.loginUser.bind(this);
     this.logoutUser = this.logoutUser.bind(this);
     this.changeCoreConfig = this.changeCoreConfig.bind(this);
+
+    this.setAlertHeader = this.setAlertHeader.bind(this);
 
     this.baseURL = 'https://fanbase-gacha-api.herokuapp.com';
     // this.baseURL = 'http://localhost:3000';
@@ -60,24 +63,12 @@ class App extends React.Component {
 
 /////////////////////////////////////////////
 
-
-
-  resetMessages(messageArray){
-    // this.setState({
-    //     messages: messageArray
-    // })
-    if(this.state.messages.length !== messageArray){
-      this.getGroupData(this.state.currentGroupID);
-    }
-    this.setState({
-        messages: this.state.groupData.rooms[`${this.state.currentRoomIndex}`].messages
-    })
-  }
-
-  /////////////////////////////////////////////
-
-
-  /////////////////////////////////////////////
+setAlertHeader(message, type){
+  this.setState({
+    alertMessage: message,
+    alertType: type
+  })
+}
 
   
 
@@ -116,7 +107,7 @@ class App extends React.Component {
          )
       } else {
         return (
-          <StrangerCoreComponent baseURL={this.baseURL} loginUser={this.loginUser} changeCoreConfig={this.changeCoreConfig}/>
+          <StrangerCoreComponent baseURL={this.baseURL} loginUser={this.loginUser} changeCoreConfig={this.changeCoreConfig} setAlertHeader={this.setAlertHeader}/>
         )
       }
   }
@@ -126,7 +117,11 @@ class App extends React.Component {
       <div>
       <div className="overflow-hidden">
         <HeaderComponent currentUser={this.state.currentUser} logoutUser={this.logoutUser} changeCoreConfig={this.changeCoreConfig}/>
-          { /*<AlertComponent/>*/}
+          { 
+            this.state.alertMessage !== null && this.state.alertMessage !== '' ? (
+               <AlertComponent alertMessage={this.state.alertMessage} alertType={this.state.alertType}/>
+          ) : null
+        }
            {this.renderCoreComponent()}
         </div>
       </div>

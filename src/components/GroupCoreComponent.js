@@ -83,19 +83,39 @@ class GroupCoreComponent extends React.Component {
     }
 
     // Build rolling deck based on group's selected categories
-    buildRollingDeck() {
+    async buildRollingDeck() {
         const newDeck = [];
         this.state.groupData.categories.map((category) => {
           category.decks.map((deck) => {
             deck.cards.map((card) => {
-              newDeck.push(card);
+                card.isClaimed = false;
+                newDeck.push(card);
             })
           })
         })
+
+        const response = await axios.post(`${this.props.baseURL}/group_cards`, {
+            group_id: this.state.currentGroupID
+        })
+
+        const group_cards = response.data;
+        console.log(response.data);
+
+        const newDeckWithOwners = newDeck.map((card) => {
+            group_cards.map((group_card) => {
+                if(card.id == group_card.card_id){
+                    card.isClaimed = true;
+                    card.owner = group_card.user
+                }
+            })
+            return card;
+        })
     
         this.setState({
-          rollingDeck: newDeck
+          rollingDeck: newDeckWithOwners
         })
+
+        console.log('hello')
       }
 
 
@@ -106,7 +126,7 @@ class GroupCoreComponent extends React.Component {
             )
         } else if (this.state.pageConfig == 'gacha') {
             return (
-                <RollingSiteComponent rollingDeck={this.state.rollingDeck}/>
+                <RollingSiteComponent rollingDeck={this.state.rollingDeck} buildRollingDeck={this.buildRollingDeck} currentUser={this.props.currentUser} baseURL={this.props.baseURL}/>
             )
         }
     }

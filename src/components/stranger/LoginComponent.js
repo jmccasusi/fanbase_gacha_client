@@ -20,6 +20,8 @@ class LoginComponent extends React.Component {
 
   handleSubmit(event) {
       event.preventDefault();
+
+      var current = this;
       
       axios.post(`${this.props.baseURL}/user_token`, {
           auth: {
@@ -37,12 +39,20 @@ class LoginComponent extends React.Component {
         this.props.changeCoreConfig('group');
         sessionStorage.setItem("jwt", res.data.jwt);
         this.props.loginUser(res.data.jwt);
+        this.props.setAlertHeader(null, null);
         }
       ).catch(function (error) {
         if (error.response) {
           console.log('ERROR!')
+          current.props.setAlertHeader("Invalid email/password", "danger");
+
+          current.setState({
+              email: '',
+              password: '',
+              isAdmin: false
+          })
         }
-      });
+      })
 
     //   if(!response.data.error)
     //   {
@@ -122,7 +132,10 @@ componentDidMount() {
               </Form>
               <hr/>
               <div className="d-flex justify-content-center">
-                <h6>Don't have an account? <a href='#' onClick={() => {this.props.changePageConfig('signup')}}>Create one!</a></h6>
+                <h6>Don't have an account? <a href='#' onClick={() => {
+                  this.props.setAlertHeader(null, null);
+                  this.props.changePageConfig('signup');
+                }}>Create one!</a></h6>
               </div>
             </div> 
         </div>    

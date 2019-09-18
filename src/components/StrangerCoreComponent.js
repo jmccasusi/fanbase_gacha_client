@@ -22,7 +22,7 @@ class StrangerCoreComponent extends React.Component {
     renderCenterComponent() {
         if(this.state.pageConfig == 'login'){
             return (
-                    <LoginComponent baseURL={this.props.baseURL} changePageConfig={this.changePageConfig} changeCoreConfig={this.props.changeCoreConfig} loginUser={this.props.loginUser}/>
+                    <LoginComponent baseURL={this.props.baseURL} changePageConfig={this.changePageConfig} changeCoreConfig={this.props.changeCoreConfig} loginUser={this.props.loginUser} setAlertHeader={this.props.setAlertHeader}/>
             )
         } else if (this.state.pageConfig == 'signup') {
             return (

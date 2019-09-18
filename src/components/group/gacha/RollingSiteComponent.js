@@ -46,7 +46,7 @@ class RollingSiteComponent extends React.Component {
                 {
                     this.state.rolledCards.map((card) => {
                         return (
-                            <CardComponent card={card}/>
+                            <CardComponent card={card} buildRollingDeck={this.props.buildRollingDeck} currentUser={this.props.currentUser} baseURL={this.props.baseURL}/>
                         )
                     })
                 }
