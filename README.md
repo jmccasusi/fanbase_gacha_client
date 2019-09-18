@@ -1,68 +1,34 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Fanbase Gacha Messenger App
 
-## Available Scripts
+The FG Messenger App is a simple chat app, integrated with a fun trading card game that is customizable per group.
 
-In the project directory, you can run:
+[https://obscure-sea-29705.herokuapp.com](https://obscure-sea-29705.herokuapp.com)
 
-### `npm start`
+![screenshot of page](screenshot-1.png 'Test screenshot1')
+![screenshot of page](screenshot-2.png 'Test screenshot2')
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Current Features
+- User can sign up for an account and join the chat group
+- User can log in using their credentials securely through the use of JWT
+- Ability to switch between chatrooms
+- Ability to chat with other online users in real time, through the use of websockets
+- Access to the 'Rolling Site' wherein users can roll for 3 random cards at a time
+- Ability to claim a card, which makes you the sole owner of that card
+- Have fun collecting cards for now!
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Technologies
+- ReactJS
+- Axios
+- react-bootstrap
+- socket.io
+- JWT
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Future Improvements
+- Trading part of the game
+- Ability to create, join and leave different groups
+- Ability for the group owner to change group configurations and to add rooms (chat channels)
+- Modify the Rolling Site to be real-time as well so that all users can see everyone's roll and perform a "steal claim" from there rolls
+- Design for the cards
+- Request section for members to add Cards or details
+- "Approval of requests" section for group owner and admin
+- Multiple images per card
