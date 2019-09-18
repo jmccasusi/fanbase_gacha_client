@@ -4,7 +4,7 @@ import { Container, Row, Col, Alert } from 'react-bootstrap'
 class LeftControlPanelComponent extends React.Component {
     render() {
         return (
-            <Col className='d-none d-md-block flex-column align-items-center border border-dark p-3 scrollVertical defaultHeight'>
+            <Col className='d-none d-lg-block flex-column align-items-center border border-dark p-3 scrollVertical defaultHeight'>
               <Row className='flex-row justify-content-center  border-bottom w-100 my-2 py-2'>
                   <h5>{this.props.currentUser.username}</h5>
               </Row>
@@ -13,13 +13,19 @@ class LeftControlPanelComponent extends React.Component {
                   <h5>Chat Rooms</h5>
                   {
                     this.props.rooms ? (
-                      this.props.rooms.map(room => {
-                          return (
+                      this.props.rooms.map((room, index) => {
+                          if(index==0){
+                            return (
                               <li onClick={() => {
                                 this.props.changeRoomData(room.id);
                                 this.props.changePageConfig('chat');
                               }}>{room.name}</li>
                           )
+                          } else {
+                            return(
+                              <li><del>{room.name}</del></li>
+                            )
+                          }
                       })) : null
                   }
                 </div>

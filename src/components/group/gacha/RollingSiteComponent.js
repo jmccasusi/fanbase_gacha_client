@@ -9,6 +9,7 @@ class RollingSiteComponent extends React.Component {
             rolledCards: []
         }
         this.rollCards = this.rollCards.bind(this);
+        this.scrollToBottom = this.scrollToBottom.bind(this);
     }
 
     // Get 3 random cards from the rolling deck
@@ -31,18 +32,33 @@ class RollingSiteComponent extends React.Component {
         })
     }
 
+    scrollToBottom() {
+        const scrollHeight = this.messageList.scrollHeight;
+        const height = this.messageList.clientHeight;
+        const maxScrollTop = scrollHeight - height;
+        this.messageList.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+    }
+
     componentDidMount(){
         this.rollCards();
+        this.scrollToBottom();
+        this.rollCards();
+    }
+
+    componentDidUpdate(){
+        this.scrollToBottom();
     }
 
     render() {
         return (
-           <Col className="d-flex flex-column col-md-6 align-items-center border border-dark px-4 py-2 w-100 defaultHeight">
+           <Col className="d-flex flex-column col-lg-8 align-items-center border border-dark px-4 py-2 w-100 defaultHeight">
             <Row className='flex-row justify-content-center border-bottom w-100'>
                 <h5>GACHA - Rolling Site</h5>
             </Row>
             <Row>
-            <Col xs={12} className='d-flex flex-row justify-content-center jumbotron scrollVertical2'>
+            <Col xs={12} className='d-flex flex-row justify-content-center jumbotron scrollVertical2'ref={(div) => {
+                this.messageList = div;
+            }}>
                 {
                     this.state.rolledCards.map((card) => {
                         return (
@@ -50,6 +66,7 @@ class RollingSiteComponent extends React.Component {
                         )
                     })
                 }
+                <div ref={this.messagesEndRef} />
             </Col>
             </Row>
             <Row>

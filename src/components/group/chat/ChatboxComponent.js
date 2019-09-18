@@ -70,7 +70,7 @@ class ChatboxComponent extends React.Component {
 
     render() {
         return (
-            <Col className="d-flex flex-column col-md-6 align-items-center border border-dark px-4 py-2 w-100 defaultHeight">
+            <Col className="d-flex flex-column col-lg-6 align-items-center border border-dark px-4 py-2 w-100 defaultHeight">
             <Row className='flex-row justify-content-center border-bottom w-100'>
                 <h5>{this.props.currentRoomData.name}</h5>
             </Row>
