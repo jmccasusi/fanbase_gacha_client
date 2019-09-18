@@ -2,7 +2,7 @@
 
 The FG Messenger App is a simple chat app, integrated with a fun trading card game that is customizable per group.
 
-[https://obscure-sea-29705.herokuapp.com](https://obscure-sea-29705.herokuapp.com)
+[http://fanbase-gacha-app.surge.sh](http://fanbase-gacha-app.surge.sh)
 
 ![screenshot of page](screenshot-1.png 'Test screenshot1')
 ![screenshot of page](screenshot-2.png 'Test screenshot2')
